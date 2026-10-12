@@ -1,1 +1,117 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sorteo Premium | iPhone</title>
+<meta name="description" content="Conocé nuestro sorteo y sus condiciones.">
+<style>
+:root{color-scheme:dark;--bg:#08090b;--panel:#121419;--line:#292d35;--muted:#9ca3af;--silver:#e5e7eb}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 50% 0%,#252a33 0%,#0b0c0f 48%,#070708 100%);color:#f8fafc;font-family:Arial,Helvetica,sans-serif}
+header{max-width:1120px;margin:auto;padding:25px 22px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #262a30}
+.logo{font-weight:800;letter-spacing:2px}.logo span{color:#9ca3af}
+.pill{border:1px solid #444955;border-radius:30px;padding:8px 12px;font-size:12px;color:#d1d5db}
+main{max-width:1050px;margin:auto;padding:45px 22px 70px}
+.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center}
+.eyebrow{font-size:12px;letter-spacing:3px;color:#b6bdc8;text-transform:uppercase}
+h1{font-size:clamp(38px,6vw,66px);line-height:1.02;letter-spacing:-2px;margin:18px 0}
+h1 span{color:#aeb6c2}
+.intro{color:#aeb4bf;line-height:1.7;max-width:460px}
+.prize{background:linear-gradient(145deg,#20242b,#0d0e11 70%);border:1px solid #343943;border-radius:24px;padding:22px;text-align:center;box-shadow:0 25px 80px #0008}
+.prize img{width:100%;height:290px;object-fit:contain;filter:drop-shadow(0 20px 25px #0009)}
+.prize small{color:#aab1bd;letter-spacing:2px}
+.prize h2{margin:9px 0 4px;font-size:24px}
+section{margin-top:55px}
+.section-title{font-size:25px;margin:0 0 8px}
+.muted{color:var(--muted);font-size:14px;line-height:1.6}
+.card{background:#101216;border:1px solid var(--line);border-radius:18px;padding:24px;margin-top:20px}
+.numbers{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:9px;margin-top:20px}
+.num{background:#191c22;border:1px solid #343943;border-radius:9px;padding:12px 0;color:#e5e7eb;cursor:pointer}
+.num:hover{border-color:#aab3c1}
+.num.selected{background:#dce1e8;color:#111318;border-color:#fff;font-weight:bold}
+.num:disabled{opacity:.35;cursor:not-allowed;text-decoration:line-through}
+.summary{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:20px;padding-top:17px;border-top:1px solid var(--line)}
+button.primary{background:#e5e7eb;color:#111318;border:0;padding:14px 20px;border-radius:10px;font-weight:750;cursor:pointer}
+button.primary:hover{background:#fff}
+button.secondary{background:transparent;color:#e5e7eb;border:1px solid #444955;padding:12px 17px;border-radius:10px;cursor:pointer}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+.notice{font-size:12px;color:#aab1bd;line-height:1.7;margin-top:15px}
+footer{border-top:1px solid #262a30;padding:24px;text-align:center;color:#858c98;font-size:12px}
+@media(max-width:720px){.hero{grid-template-columns:1fr;gap:25px}main{padding-top:30px}.prize img{height:240px}.numbers{grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}.card{padding:17px}header{padding:20px 16px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">SORTEO<span> / PREMIUM</span></div>
+  <div class="pill">EDICIÓN ESPECIAL</div>
+</header>
+<main>
+  <div class="hero">
+    <div>
+      <div class="eyebrow">Una experiencia exclusiva</div>
+      <h1>Tu próximo<br><span>iPhone.</span></h1>
+      <p class="intro">Descubrí todos los detalles de nuestro próximo sorteo. Explorá los números de demostración y conocé las condiciones antes de participar.</p>
+      <div class="actions"><button class="primary" onclick="document.getElementById('participar').scrollIntoView({behavior:'smooth'})">Ver números ↓</button></div>
+      <p class="notice">DEMO · Esta página todavía no vende participaciones ni procesa pagos.</p>
+    </div>
+    <div class="prize">
+      <img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?auto=format&fit=crop&w=900&q=85" alt="Teléfono inteligente de referencia">
+      <small>PREMIO DESTACADO</small>
+      <h2>iPhone</h2>
+      <p class="muted">Modelo, capacidad y condiciones del premio se publicarán al confirmar las bases.</p>
+    </div>
+  </div>
+  <section id="participar">
+    <h2 class="section-title">Explorá los números</h2>
+    <p class="muted">Elegí números para probar la interfaz. La selección solo funciona en esta demostración y no reserva ni compra números reales.</p>
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center">
+        <strong>Selección de números</strong><span class="pill">00 — 99 · DEMO</span>
+      </div>
+      <div class="numbers" id="numbers"></div>
+      <div class="summary">
+        <div><div class="muted">Seleccionados</div><strong id="count">0 números</strong></div>
+        <button class="secondary" onclick="clearSelection()">Limpiar selección</button>
+      </div>
+      <div class="notice" id="message" aria-live="polite">Modo de demostración: ningún número está reservado.</div>
+    </div>
+  </section>
+  <section>
+    <h2 class="section-title">Información del sorteo</h2>
+    <div class="card">
+      <p class="muted"><strong style="color:#f8fafc">Bases y condiciones</strong><br>Antes de abrir inscripciones se deben publicar las reglas completas, organizador responsable, premio exacto, fechas, método verificable de selección del ganador y requisitos legales aplicables.</p>
+      <p class="muted"><strong style="color:#f8fafc">Pagos y privacidad</strong><br>Los pagos están deshabilitados. No ingreses datos personales ni información financiera en esta demostración.</p>
+    </div>
+  </section>
+</main>
+<footer>© <span id="year"></span> Sorteo Premium · Sitio de demostración</footer>
+<script>
+const selected=new Set();
+const grid=document.getElementById('numbers');
+for(let i=0;i<100;i++){
+  const b=document.createElement('button');
+  b.className='num';
+  b.textContent=String(i).padStart(2,'0');
+  b.setAttribute('aria-pressed','false');
+  b.onclick=()=>{
+    const n=String(i).padStart(2,'0');
+    if(selected.has(n)){selected.delete(n);b.classList.remove('selected');b.setAttribute('aria-pressed','false')}
+    else{selected.add(n);b.classList.add('selected');b.setAttribute('aria-pressed','true')}
+    document.getElementById('count').textContent=selected.size+' número'+(selected.size===1?'':'s');
+    document.getElementById('message').textContent=selected.size? 'Selección de demostración: '+[...selected].sort().join(', ')+'. No constituye una reserva.':'Modo de demostración: ningún número está reservado.';
+  };
+  grid.appendChild(b);
+}
+function clearSelection(){
+ selected.clear();
+ document.querySelectorAll('.num').forEach(b=>{b.classList.remove('selected');b.setAttribute('aria-pressed','false')});
+ document.getElementById('count').textContent='0 números';
+ document.getElementById('message').textContent='Modo de demostración: ningún número está reservado.';
+}
+document.getElementById('year').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
+
